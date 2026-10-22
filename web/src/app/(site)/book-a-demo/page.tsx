@@ -11,21 +11,41 @@ export const metadata = pageMeta(
   "/book-a-demo",
 );
 
+const points = [
+  "Sales at the counter or on the phone",
+  "Palmpay next business day, or Nomba instantly",
+  "Stock, profit, and the close-of-day report",
+];
+
 export default function DemoPage() {
   return (
-    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-[1fr_1fr]">
+    <div className="hero-wash bg-white">
       <JsonLd data={breadcrumbSchema("Book a demo", "/book-a-demo")} />
-      <div className="grid content-start gap-4">
-        <Crumbs current="Book a demo" />
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">See BluuPay on your kind of shop</h1>
-        <p className="text-lg leading-8 text-muted">
-          Tell us what you sell. We will walk through sales, payments, stock, and the report you would read at close. The demo uses what is live today.
-        </p>
-        <p className="text-sm leading-6 text-muted">
-          Prefer email? Write to <a className="font-semibold text-blue" href="mailto:hello@bluupay.co">hello@bluupay.co</a>.
-        </p>
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:py-20">
+        <div className="grid content-start gap-5">
+          <Crumbs current="Book a demo" />
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">Demo</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl">See BluuPay on your kind of shop</h1>
+          <p className="text-lg leading-8 text-muted">
+            Tell us what you sell. We will walk through sales, payments, stock, and the report you would read at close. The demo uses what is live today.
+          </p>
+          <ul className="grid gap-3">
+            {points.map((point) => (
+              <li key={point} className="rounded-2xl border border-line bg-white px-4 py-3 text-sm font-medium">
+                {point}
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm leading-6 text-muted">
+            Prefer email? Write to{" "}
+            <a className="font-semibold text-blue" href="mailto:hello@bluupay.co">
+              hello@bluupay.co
+            </a>
+            .
+          </p>
+        </div>
+        <LeadForm kind="demo" verticals={verticals.map((item) => item.name)} />
       </div>
-      <LeadForm kind="demo" verticals={verticals.map((item) => item.name)} />
     </div>
   );
 }

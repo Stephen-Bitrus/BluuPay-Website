@@ -1,5 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
-import { ComingSoon, Crumbs, CtaBand, FeatureGroups } from "@/components/Sections";
+import { ComingSoon, CtaBand, FeatureGroups, PageHero } from "@/components/Sections";
 import { getContent } from "@/lib/content";
 import { breadcrumbSchema, softwareSchema } from "@/lib/schema";
 import { dashboardUrl, pageMeta } from "@/lib/seo";
@@ -15,18 +15,21 @@ export const metadata = pageMeta(
 export default async function ProductPage() {
   const content = await getContent();
   return (
-    <div className="mx-auto grid max-w-6xl gap-12 px-4 py-12">
+    <>
       <JsonLd data={[breadcrumbSchema("Product", "/product"), softwareSchema()]} />
-      <header className="grid gap-4">
-        <Crumbs current="Product" />
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Everything the shop does, on one record</h1>
-        <p className="max-w-2xl text-lg leading-8 text-muted">
-          Sell at the counter or in the mobile app. Get paid through Palmpay or Nomba MFB. Run stock, invoices, customers, expenses, tax, staff, and outlets from the same place.
-        </p>
-      </header>
-      <FeatureGroups features={content.liveFeatures} />
-      <ComingSoon features={content.soonFeatures} />
+      <PageHero
+        crumb="Product"
+        eyebrow="Product"
+        title="Everything the shop does, on one record"
+        lede="Sell at the counter or in the mobile app. Get paid through Palmpay or Nomba MFB. Run stock, invoices, customers, expenses, tax, staff, and outlets from the same place."
+      />
+      <div className="bg-paper">
+        <div className="mx-auto grid max-w-6xl gap-16 px-4 py-16 sm:py-20">
+          <FeatureGroups features={content.liveFeatures} />
+          <ComingSoon features={content.soonFeatures} />
+        </div>
+      </div>
       <CtaBand dashboard={dashboardUrl()} />
-    </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { btnPrimary } from "@/lib/ui";
 
 type Kind = "demo" | "agent";
 
@@ -48,29 +49,39 @@ export function LeadForm({ kind, verticals }: { kind: Kind; verticals?: string[]
     }
   }
 
+  const field =
+    "rounded-xl border border-line bg-paper px-3 py-3 text-base font-normal outline-none transition focus:border-blue focus:bg-white focus:ring-4 focus:ring-blue/10";
+
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 rounded-2xl border border-line bg-white p-5 sm:p-8" noValidate={false}>
-      <h2 className="text-xl font-semibold">{copy[kind].title}</h2>
-      <label className="grid gap-1 text-sm font-medium">
-        Name
-        <input required name="name" autoComplete="name" maxLength={120} className="rounded-lg border border-line px-3 py-3 text-base font-normal" />
-      </label>
-      <label className="grid gap-1 text-sm font-medium">
-        Business name
-        <input required name="business" autoComplete="organization" maxLength={160} className="rounded-lg border border-line px-3 py-3 text-base font-normal" />
-      </label>
-      <label className="grid gap-1 text-sm font-medium">
-        Phone
-        <input required name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} className="rounded-lg border border-line px-3 py-3 text-base font-normal" />
-      </label>
-      <label className="grid gap-1 text-sm font-medium">
-        Email
-        <input required name="email" type="email" autoComplete="email" maxLength={160} className="rounded-lg border border-line px-3 py-3 text-base font-normal" />
-      </label>
+    <form onSubmit={onSubmit} className="grid gap-4 rounded-[1.75rem] border border-line bg-white p-5 shadow-[0_24px_60px_-36px_rgba(16,20,40,0.75)] sm:p-8" noValidate={false}>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue">
+          {kind === "demo" ? "Demo" : "Agents"}
+        </p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight">{copy[kind].title}</h2>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-1.5 text-sm font-medium">
+          Name
+          <input required name="name" autoComplete="name" maxLength={120} className={field} />
+        </label>
+        <label className="grid gap-1.5 text-sm font-medium">
+          Business name
+          <input required name="business" autoComplete="organization" maxLength={160} className={field} />
+        </label>
+        <label className="grid gap-1.5 text-sm font-medium">
+          Phone
+          <input required name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} className={field} />
+        </label>
+        <label className="grid gap-1.5 text-sm font-medium">
+          Email
+          <input required name="email" type="email" autoComplete="email" maxLength={160} className={field} />
+        </label>
+      </div>
       {kind === "demo" && verticals ? (
-        <label className="grid gap-1 text-sm font-medium">
+        <label className="grid gap-1.5 text-sm font-medium">
           Kind of business
-          <select name="vertical" required className="rounded-lg border border-line px-3 py-3 text-base font-normal" defaultValue="">
+          <select name="vertical" required className={field} defaultValue="">
             <option value="" disabled>
               Choose one
             </option>
@@ -82,28 +93,31 @@ export function LeadForm({ kind, verticals }: { kind: Kind; verticals?: string[]
           </select>
         </label>
       ) : (
-        <label className="grid gap-1 text-sm font-medium">
+        <label className="grid gap-1.5 text-sm font-medium">
           City
-          <input required name="city" autoComplete="address-level2" maxLength={80} className="rounded-lg border border-line px-3 py-3 text-base font-normal" />
+          <input required name="city" autoComplete="address-level2" maxLength={80} className={field} />
         </label>
       )}
-      <label className="grid gap-1 text-sm font-medium">
+      <label className="grid gap-1.5 text-sm font-medium">
         {kind === "demo" ? "What do you want to see?" : "How do you reach merchants today?"}
-        <textarea name="note" rows={4} maxLength={1000} className="rounded-lg border border-line px-3 py-3 text-base font-normal" />
+        <textarea name="note" rows={4} maxLength={1000} className={field} />
       </label>
       <label className="absolute left-[-9999px]" aria-hidden="true">
         Website
         <input name="company_website" tabIndex={-1} autoComplete="off" />
       </label>
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="rounded-full bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-deep disabled:opacity-60"
-      >
+      <button type="submit" disabled={status === "sending"} className={`${btnPrimary} px-5 py-3 disabled:translate-y-0 disabled:opacity-60`}>
         {status === "sending" ? "Sending…" : copy[kind].submit}
       </button>
       {message ? (
-        <p role="status" className={status === "error" ? "text-sm text-soon" : "text-sm text-ink"}>
+        <p
+          role="status"
+          className={
+            status === "error"
+              ? "rounded-xl bg-red-50 px-4 py-3 text-sm leading-6 text-danger"
+              : "rounded-xl bg-emerald-50 px-4 py-3 text-sm leading-6 text-emerald-900"
+          }
+        >
           {message}
         </p>
       ) : null}

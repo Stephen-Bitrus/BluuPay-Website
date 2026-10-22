@@ -5,11 +5,11 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 export function LegalDocument({ doc }: { doc: LegalDoc }) {
   return (
-    <article className="mx-auto grid max-w-3xl gap-8 px-4 py-12">
+    <article className="mx-auto grid max-w-3xl gap-8 px-4 py-14 sm:py-20">
       <JsonLd data={breadcrumbSchema(doc.title, doc.path)} />
-      <header className="grid gap-4">
+      <header className="grid gap-4 border-b border-line pb-8">
         <Crumbs current={doc.title} />
-        <h1 className="text-4xl font-semibold tracking-tight">{doc.title}</h1>
+        <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{doc.title}</h1>
         <p className="text-sm text-muted">Last updated: {doc.updated}</p>
       </header>
       {doc.sections.map((section) => (

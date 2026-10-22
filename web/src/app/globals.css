@@ -2,18 +2,37 @@
 
 @theme {
   --font-sans: var(--font-outfit), "Segoe UI", sans-serif;
-  --color-ink: #141821;
+  --color-ink: #12151c;
   --color-blue: #0014ce;
   --color-blue-deep: #000a78;
-  --color-paper: #f3f5fb;
-  --color-line: #d8deec;
-  --color-muted: #526077;
-  --color-soon: #7a4e0d;
-  --color-soon-bg: #fff4df;
+  --color-blue-soft: #e7edff;
+  --color-paper: #f5f7fb;
+  --color-line: #e1e6f2;
+  --color-muted: #5c667c;
+  --color-soon: #8a5a12;
+  --color-soon-bg: #fff6e8;
+  --color-night: #0c1230;
+  --color-danger: #9f2d2d;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.hero-wash {
+  background-image:
+    radial-gradient(ellipse 70% 55% at 100% -10%, rgba(0, 20, 206, 0.16), transparent 52%),
+    linear-gradient(to right, rgba(0, 20, 206, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 20, 206, 0.045) 1px, transparent 1px);
+  background-size: auto, 56px 56px, 56px 56px;
 }
 
 body {
