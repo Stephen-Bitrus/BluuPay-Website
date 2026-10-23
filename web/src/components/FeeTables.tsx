@@ -1,7 +1,7 @@
 import type { Provider } from "@/content/site";
 import { channelMark, Mark } from "@/components/Icons";
 
-function Table({
+function Payouts({
   caption,
   rows,
 }: {
@@ -9,26 +9,38 @@ function Table({
   rows: { channel: string; fee: string; note: string }[];
 }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
-        <caption className="mb-3 text-left text-base font-semibold text-ink">{caption}</caption>
-        <thead>
-          <tr className="border-b border-line text-muted">
-            <th scope="col" className="py-3 pr-4 font-medium">Channel</th>
-            <th scope="col" className="py-3 pr-4 font-medium">BluuPay fee</th>
-            <th scope="col" className="py-3 font-medium">Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.channel} className="border-b border-line align-top last:border-b-0">
-              <th scope="row" className="py-4 pr-4 font-medium">{row.channel}</th>
-              <td className="py-4 pr-4 text-base font-semibold tabular-nums text-ink">{row.fee}</td>
-              <td className="py-4 text-muted">{row.note}</td>
+    <div>
+      <h3 className="text-base font-semibold">{caption}</h3>
+      <ul className="mt-3 grid gap-3 md:hidden">
+        {rows.map((row) => (
+          <li key={row.channel} className="rounded-2xl bg-paper p-4">
+            <p className="text-sm font-medium">{row.channel}</p>
+            <p className="mt-1 text-lg font-semibold tabular-nums">{row.fee}</p>
+            <p className="mt-1 text-sm leading-5 text-muted">{row.note}</p>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-3 hidden md:block">
+        <table className="w-full border-collapse text-left text-sm">
+          <caption className="sr-only">{caption}</caption>
+          <thead>
+            <tr className="border-b border-line text-muted">
+              <th scope="col" className="py-3 pr-4 font-medium">Channel</th>
+              <th scope="col" className="py-3 pr-4 font-medium">BluuPay fee</th>
+              <th scope="col" className="py-3 font-medium">Notes</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.channel} className="border-b border-line align-top last:border-b-0">
+                <th scope="row" className="py-4 pr-4 font-medium">{row.channel}</th>
+                <td className="py-4 pr-4 text-base font-semibold tabular-nums text-ink">{row.fee}</td>
+                <td className="py-4 text-muted">{row.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -72,7 +84,7 @@ export function FeeTables({ providers }: { providers: Provider[] }) {
               ))}
             </div>
             <div className="px-5 pb-6 sm:px-8">
-              <Table caption={`${provider.name} payouts`} rows={provider.payouts} />
+              <Payouts caption={`${provider.name} payouts`} rows={provider.payouts} />
             </div>
           </section>
         );

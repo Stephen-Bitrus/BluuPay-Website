@@ -422,6 +422,7 @@ export const nav = [
   { href: "/solutions", label: "Solutions" },
   { href: "/pricing", label: "Pricing" },
   { href: "/mobile", label: "Mobile" },
+  { href: "/agents", label: "Agents" },
 ] as const;
 
 export const pages = [

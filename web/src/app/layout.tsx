@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import type { ReactNode } from "react";
 import { site } from "@/content/site";
@@ -29,6 +29,10 @@ export const metadata: Metadata = {
     "Nomba MFB",
   ],
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0014ce",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -370,7 +370,7 @@ export function PayRail() {
     ["cash", "Cash"],
   ] as const;
   return (
-    <ul className="stagger flex flex-wrap gap-2" aria-label="Priced collection channels">
+    <ul className="stagger flex flex-wrap gap-2" aria-label="Ways to take payment">
       {items.map(([name, label]) => (
         <li
           key={name}

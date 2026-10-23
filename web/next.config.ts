@@ -11,10 +11,25 @@ const nextConfig: NextConfig = {
     if (dev && !isServer) {
       // Next inlines full source maps into the studio bundle, which makes the
       // browser chunk about 40MB and the loader times out.
-      config.plugins = config.plugins?.filter((plugin) => plugin?.constructor?.name !== "EvalSourceMapDevToolPlugin");
+      config.plugins = config.plugins?.filter(
+        (plugin: { constructor?: { name?: string } }) => plugin?.constructor?.name !== "EvalSourceMapDevToolPlugin",
+      );
       config.output.chunkLoadTimeout = 300000;
     }
     return config;
+  },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        ],
+      },
+    ];
   },
   async redirects() {
     return [

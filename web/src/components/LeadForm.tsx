@@ -59,28 +59,31 @@ export function LeadForm({ kind, verticals }: { kind: Kind; verticals?: string[]
           {kind === "demo" ? "Demo" : "Agents"}
         </p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight">{copy[kind].title}</h2>
+        <p className="mt-2 text-sm text-muted">
+          Required fields are marked with <span className="text-danger">*</span>.
+        </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-1.5 text-sm font-medium">
-          Name
+          Name <span className="text-danger">*</span>
           <input required name="name" autoComplete="name" maxLength={120} className={field} />
         </label>
         <label className="grid gap-1.5 text-sm font-medium">
-          Business name
+          Business name <span className="text-danger">*</span>
           <input required name="business" autoComplete="organization" maxLength={160} className={field} />
         </label>
         <label className="grid gap-1.5 text-sm font-medium">
-          Phone
+          Phone <span className="text-danger">*</span>
           <input required name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} className={field} />
         </label>
         <label className="grid gap-1.5 text-sm font-medium">
-          Email
+          Email <span className="text-danger">*</span>
           <input required name="email" type="email" autoComplete="email" maxLength={160} className={field} />
         </label>
       </div>
       {kind === "demo" && verticals ? (
         <label className="grid gap-1.5 text-sm font-medium">
-          Kind of business
+          Kind of business <span className="text-danger">*</span>
           <select name="vertical" required className={field} defaultValue="">
             <option value="" disabled>
               Choose one
@@ -94,7 +97,7 @@ export function LeadForm({ kind, verticals }: { kind: Kind; verticals?: string[]
         </label>
       ) : (
         <label className="grid gap-1.5 text-sm font-medium">
-          City
+          City <span className="text-danger">*</span>
           <input required name="city" autoComplete="address-level2" maxLength={80} className={field} />
         </label>
       )}
@@ -102,7 +105,7 @@ export function LeadForm({ kind, verticals }: { kind: Kind; verticals?: string[]
         {kind === "demo" ? "What do you want to see?" : "How do you reach merchants today?"}
         <textarea name="note" rows={4} maxLength={1000} className={field} />
       </label>
-      <label className="absolute left-[-9999px]" aria-hidden="true">
+      <label className="trap-field" aria-hidden="true">
         Website
         <input name="company_website" tabIndex={-1} autoComplete="off" />
       </label>

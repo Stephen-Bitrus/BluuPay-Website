@@ -8,7 +8,7 @@ export function Footer({ dashboard }: { dashboard: string }) {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <span className="inline-flex rounded-xl bg-white px-3 py-2">
-            <Image src="/bluupay-logo.png" alt="" width={476} height={137} className="h-7 w-auto" />
+            <Image src="/bluupay-logo.png" alt="BluuPay" width={476} height={137} className="h-7 w-auto" />
           </span>
           <p className="mt-4 text-sm leading-6 text-white/70">{site.tagline}</p>
           <p className="mt-2 text-sm leading-6 text-white/70">For merchants in Nigeria.</p>
