@@ -1,26 +1,10 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { NextStudio } from "next-sanity/studio";
+import config from "../../../../sanity.config";
 
 export default function StudioPage() {
   const configured = Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
-  const [studio, setStudio] = useState<ReactNode>(null);
-
-  useEffect(() => {
-    if (!configured) return;
-    let cancelled = false;
-    void Promise.all([import("next-sanity/studio"), import("../../../../sanity.config")]).then(
-      ([mod, config]) => {
-        if (cancelled) return;
-        const NextStudio = mod.NextStudio;
-        setStudio(<NextStudio config={config.default} />);
-      },
-    );
-    return () => {
-      cancelled = true;
-    };
-  }, [configured]);
-
   if (!configured) {
     return (
       <main className="mx-auto max-w-xl px-4 py-16">
@@ -33,5 +17,9 @@ export default function StudioPage() {
     );
   }
 
-  return <main className="min-h-screen bg-white">{studio ?? <p className="p-8">Loading studio…</p>}</main>;
+  return (
+    <main className="min-h-screen bg-white">
+      <NextStudio config={config} />
+    </main>
+  );
 }
