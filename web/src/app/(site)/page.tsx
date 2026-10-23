@@ -134,7 +134,7 @@ export default async function HomePage() {
       <div className="bg-white">
         <div className="mx-auto grid max-w-6xl gap-16 px-4 py-16 sm:py-20">
           <ComingSoon features={content.soonFeatures} />
-          <InBrief live={content.liveFeatures} soon={content.soonFeatures} dashboard={dashboard} />
+          <InBrief dashboard={dashboard} />
           <FaqList items={content.faqs} />
         </div>
       </div>

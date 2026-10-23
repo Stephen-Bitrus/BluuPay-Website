@@ -36,6 +36,20 @@ export function CollectionScene() {
           <h2 className="mt-3 text-base font-semibold">Wallet payment</h2>
           <p className="mt-1 text-sm leading-6 text-white/75">Settles instantly with Palmpay and with Nomba MFB.</p>
         </article>
+        <article className="rounded-3xl border border-line bg-white p-4">
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-blue-soft text-blue">
+            <Mark name="ussd" />
+          </span>
+          <h2 className="mt-3 text-base font-semibold">USSD</h2>
+          <p className="mt-1 text-sm leading-6 text-muted">Recorded on the sale. It is not a separate row in the collection fees.</p>
+        </article>
+        <article className="rounded-3xl border border-line bg-white p-4">
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-blue-soft text-blue">
+            <Mark name="cash" />
+          </span>
+          <h2 className="mt-3 text-base font-semibold">Cash</h2>
+          <p className="mt-1 text-sm leading-6 text-muted">Recorded on the sale. It is not a separate row in the collection fees.</p>
+        </article>
       </div>
     </div>
   );

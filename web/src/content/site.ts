@@ -65,7 +65,7 @@ export const liveFeatures: Feature[] = [
     group: "Sell",
     status: "live",
     title: "Payments",
-    body: "Record a bank transfer or a wallet payment against the product that was sold. Those are the priced collection channels on the pricing page.",
+    body: "Record a bank transfer, USSD, a wallet payment, or cash against the product that was sold. Priced collections are bank transfer and wallet payment.",
   },
   {
     group: "Sell",

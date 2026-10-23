@@ -365,7 +365,9 @@ export function ClockIcon({ className = "h-4 w-4" }: { className?: string }) {
 export function PayRail() {
   const items = [
     ["transfer", "Bank transfer"],
+    ["ussd", "USSD"],
     ["wallet", "Wallet"],
+    ["cash", "Cash"],
   ] as const;
   return (
     <ul className="stagger flex flex-wrap gap-2" aria-label="Priced collection channels">

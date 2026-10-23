@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Faq, Feature, Provider } from "@/content/site";
 import { groups, journey, site } from "@/content/site";
-import { CheckIcon, ClockIcon, GroupIcon, Mark, ShopScene } from "@/components/Icons";
+import { ClockIcon, GroupIcon, Mark, PayRail, ShopScene } from "@/components/Icons";
 import { btnGhostOnDark, btnOnDark, btnPrimary, btnSecondary } from "@/lib/ui";
 
 export function Crumbs({ current }: { current: string }) {
@@ -234,52 +234,27 @@ export function SettlementChoice({ providers }: { providers: Provider[] }) {
   );
 }
 
-export function InBrief({
-  live,
-  soon,
-  dashboard,
-}: {
-  live: Feature[];
-  soon: Feature[];
-  dashboard: string;
-}) {
+export function InBrief({ dashboard }: { dashboard: string }) {
   return (
     <section id="in-brief" aria-labelledby="brief-title" className="rounded-[1.75rem] border border-line bg-white p-5 sm:p-8">
       <h2 id="brief-title" className="text-3xl font-semibold tracking-tight">
         BluuPay in brief
       </h2>
       <p className="mt-3 max-w-3xl leading-7 text-muted">{site.description}</p>
-      <p className="mt-3 leading-7">
+      <p className="mt-6 text-sm font-semibold">Ways to take payment</p>
+      <div className="mt-3">
+        <PayRail />
+      </div>
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
+        Bank transfer and wallet payment are the priced collections. USSD and cash are recorded on the sale.
+      </p>
+      <p className="mt-6 leading-7">
         Sign up and sign in at{" "}
         <a className="font-semibold text-blue" href={dashboard}>
           {dashboard.replace("https://", "")}
         </a>
         .
       </p>
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
-        <div className="rounded-2xl bg-blue-soft/60 p-5">
-          <h3 className="font-semibold">Live today</h3>
-          <ul className="mt-3 grid gap-2 text-sm leading-6">
-            {live.map((feature) => (
-              <li key={feature.title} className="flex gap-2">
-                <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-blue" />
-                <span>{feature.title}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rounded-2xl bg-paper p-5">
-          <h3 className="font-semibold">Coming soon</h3>
-          <ul className="mt-3 grid gap-2 text-sm leading-6">
-            {soon.map((feature) => (
-              <li key={feature.title} className="flex gap-2">
-                <ClockIcon className="mt-1 h-4 w-4 shrink-0 text-soon" />
-                <span>{feature.title}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
     </section>
   );
 }
