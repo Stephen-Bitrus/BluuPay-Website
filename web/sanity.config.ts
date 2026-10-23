@@ -11,6 +11,22 @@ export default defineConfig({
   projectId,
   dataset,
   basePath: "/studio",
-  plugins: [structureTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title("Content")
+          .items([
+            S.listItem()
+              .title("Demo requests")
+              .child(S.documentList().title("Demo requests").filter('_type == "lead" && kind == "demo"')),
+            S.listItem()
+              .title("Agent applications")
+              .child(S.documentList().title("Agent applications").filter('_type == "lead" && kind == "agent"')),
+            S.divider(),
+            ...S.documentTypeListItems().filter((item) => item.getId() !== "lead"),
+          ]),
+    }),
+  ],
   schema: { types: schemaTypes },
 });

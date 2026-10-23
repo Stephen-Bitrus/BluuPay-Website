@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { site } from "@/content/site";
+import { getSanityWriter } from "@/sanity/client";
 
 type Payload = {
   kind?: string;
@@ -39,41 +40,60 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: "Check the required fields and try again." }, { status: 400 });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  const writer = getSanityWriter();
+  if (!writer) {
     return Response.json(
-      { ok: false, error: `Email is not configured yet. Write to ${site.emails.hello}.` },
+      { ok: false, error: `This form is not connected yet. Write to ${site.emails.hello}.` },
       { status: 503 },
     );
   }
 
-  const subject = kind === "agent" ? `Agent application from ${name}` : `Demo request from ${name}`;
-  const text = [
-    `Kind: ${kind}`,
-    `Name: ${name}`,
-    `Business: ${business}`,
-    `Phone: ${phone}`,
-    `Email: ${email}`,
-    kind === "agent" ? `City: ${extra}` : `Vertical: ${extra}`,
-    note ? `Note: ${note}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
   try {
-    const resend = new Resend(apiKey);
-    await resend.emails.send({
-      from: process.env.RESEND_FROM || "BluuPay <hello@bluupay.co>",
-      to: process.env.LEAD_TO || site.emails.hello,
-      replyTo: email,
-      subject,
-      text,
+    await writer.create({
+      _type: "lead",
+      kind,
+      name,
+      business,
+      phone,
+      email,
+      vertical: kind === "demo" ? extra : "",
+      city: kind === "agent" ? extra : "",
+      note,
+      receivedAt: new Date().toISOString(),
     });
   } catch {
     return Response.json(
-      { ok: false, error: `We could not send that. Email ${site.emails.hello}.` },
+      { ok: false, error: `We could not save that. Email ${site.emails.hello}.` },
       { status: 502 },
     );
+  }
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (apiKey) {
+    const subject = kind === "agent" ? `Agent application from ${name}` : `Demo request from ${name}`;
+    const text = [
+      `Kind: ${kind}`,
+      `Name: ${name}`,
+      `Business: ${business}`,
+      `Phone: ${phone}`,
+      `Email: ${email}`,
+      kind === "agent" ? `City: ${extra}` : `Vertical: ${extra}`,
+      note ? `Note: ${note}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    try {
+      const resend = new Resend(apiKey);
+      await resend.emails.send({
+        from: process.env.RESEND_FROM || "BluuPay <hello@bluupay.co>",
+        to: process.env.LEAD_TO || site.emails.hello,
+        replyTo: email,
+        subject,
+        text,
+      });
+    } catch {
+      // The submission is already stored. A mail failure should not reject it.
+    }
   }
 
   return Response.json({ ok: true });

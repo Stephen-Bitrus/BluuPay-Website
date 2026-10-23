@@ -4,6 +4,19 @@ export function isSanityConfigured(): boolean {
   return Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
 }
 
+export function getSanityWriter(): SanityClient | null {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  const token = process.env.SANITY_API_TOKEN;
+  if (!projectId || !token) return null;
+  return createClient({
+    projectId,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+    apiVersion: "2026-10-22",
+    token,
+    useCdn: false,
+  });
+}
+
 export function getSanityClient(): SanityClient | null {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   if (!projectId) return null;

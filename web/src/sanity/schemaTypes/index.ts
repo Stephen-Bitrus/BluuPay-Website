@@ -116,4 +116,39 @@ export const legalPage = defineType({
   ],
 });
 
-export const schemaTypes = [feature, vertical, story, faq, paymentProvider, legalPage];
+export const lead = defineType({
+  name: "lead",
+  title: "Lead",
+  type: "document",
+  fields: [
+    defineField({
+      name: "kind",
+      type: "string",
+      options: {
+        list: [
+          { title: "Demo request", value: "demo" },
+          { title: "Agent application", value: "agent" },
+        ],
+      },
+      readOnly: true,
+      validation: (rule) => rule.required(),
+    }),
+    defineField({ name: "name", type: "string", readOnly: true, validation: (rule) => rule.required() }),
+    defineField({ name: "business", title: "Business name", type: "string", readOnly: true }),
+    defineField({ name: "phone", type: "string", readOnly: true }),
+    defineField({ name: "email", type: "string", readOnly: true }),
+    defineField({ name: "vertical", title: "Kind of business", type: "string", readOnly: true }),
+    defineField({ name: "city", type: "string", readOnly: true }),
+    defineField({ name: "note", type: "text", rows: 4, readOnly: true }),
+    defineField({ name: "receivedAt", title: "Received", type: "datetime", readOnly: true }),
+  ],
+  preview: {
+    select: { title: "name", subtitle: "business", kind: "kind" },
+    prepare({ title, subtitle, kind }) {
+      const label = kind === "agent" ? "Agent" : "Demo";
+      return { title: title || "Lead", subtitle: [label, subtitle].filter(Boolean).join(" · ") };
+    },
+  },
+});
+
+export const schemaTypes = [lead, feature, vertical, story, faq, paymentProvider, legalPage];
