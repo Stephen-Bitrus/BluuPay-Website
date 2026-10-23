@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { ProductStage } from "@/components/ProductStage";
 import { Crumbs, CtaBand } from "@/components/Sections";
 import { breadcrumbSchema } from "@/lib/schema";
+import { Mark } from "@/components/Icons";
 import { btnPrimary } from "@/lib/ui";
 import { dashboardUrl, pageMeta } from "@/lib/seo";
 
@@ -36,10 +37,17 @@ export default function MobilePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue">Live</p>
             <h2 className="mt-2 text-2xl font-semibold">Available now</h2>
             <ul className="mt-4 grid gap-3 text-sm leading-6 text-muted">
-              <li className="rounded-2xl bg-paper px-4 py-3">Point of sale on the phone</li>
-              <li className="rounded-2xl bg-paper px-4 py-3">Payments, stock, invoices, and customers</li>
-              <li className="rounded-2xl bg-paper px-4 py-3">Staff can sell under their own role</li>
-              <li className="rounded-2xl bg-paper px-4 py-3">The same business as the web dashboard</li>
+              {[
+                ["pos", "Point of sale on the phone"],
+                ["transfer", "Payments, stock, invoices, and customers"],
+                ["badge", "Staff can sell under their own role"],
+                ["outlets", "The same business as the web dashboard"],
+              ].map(([name, label]) => (
+                <li key={label} className="flex items-center gap-3 rounded-2xl bg-paper px-4 py-3">
+                  <Mark name={name} className="h-4 w-4 shrink-0 text-blue" />
+                  <span>{label}</span>
+                </li>
+              ))}
             </ul>
             <a href={dashboard} className={`${btnPrimary} mt-6 px-5 py-3`}>
               Open the dashboard

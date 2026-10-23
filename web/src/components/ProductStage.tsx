@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Mark } from "@/components/Icons";
 
 const shots = [
   {
@@ -78,7 +79,10 @@ export function ProductGallery({ include = ["pos", "products", "sales"] }: { inc
                   className="h-auto w-full"
                 />
                 <figcaption className="border-t border-line px-4 py-3">
-                  <span className="block text-sm font-semibold">{shot.title}</span>
+                  <span className="flex items-center gap-2 text-sm font-semibold">
+                    <Mark name={shot.title} className="h-4 w-4 text-blue" />
+                    {shot.title}
+                  </span>
                   <span className="mt-1 block text-sm leading-6 text-muted">{shot.body}</span>
                 </figcaption>
               </figure>

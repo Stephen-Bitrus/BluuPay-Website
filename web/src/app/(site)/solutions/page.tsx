@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { Mark, ShopScene } from "@/components/Icons";
 import { CtaBand, PageHero } from "@/components/Sections";
 import { getContent } from "@/lib/content";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -29,11 +30,17 @@ export default async function SolutionsPage() {
             <li
               key={vertical.name}
               id={vertical.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-              className={`rounded-[1.75rem] border border-line bg-white p-6 shadow-[0_18px_50px_-36px_rgba(16,20,40,0.65)] ${index === 0 ? "sm:col-span-2 sm:p-8" : ""}`}
+              className={`rounded-[1.75rem] border border-line bg-white p-6 shadow-[0_18px_50px_-36px_rgba(16,20,40,0.65)] ${index === 0 ? "sm:col-span-2 sm:grid sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8 sm:p-8" : ""}`}
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue">Nigeria</p>
-              <h2 className={`mt-2 font-semibold tracking-tight ${index === 0 ? "text-3xl" : "text-xl"}`}>{vertical.name}</h2>
-              <p className="mt-3 max-w-2xl leading-7 text-muted">{vertical.body}</p>
+              <div>
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-soft text-blue">
+                  <Mark name={vertical.name} />
+                </span>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-blue">Nigeria</p>
+                <h2 className={`mt-2 font-semibold tracking-tight ${index === 0 ? "text-3xl" : "text-xl"}`}>{vertical.name}</h2>
+                <p className="mt-3 max-w-2xl leading-7 text-muted">{vertical.body}</p>
+              </div>
+              {index === 0 ? <ShopScene className="mt-6 h-32 w-48 text-blue sm:mt-0 sm:h-40 sm:w-56" /> : null}
             </li>
           ))}
         </ul>

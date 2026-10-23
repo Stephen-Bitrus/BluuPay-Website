@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { ProductGallery, ProductStage } from "@/components/ProductStage";
+import { Mark, PayRail } from "@/components/Icons";
 import {
   ActionRow,
   ComingSoon,
@@ -45,6 +46,9 @@ export default async function HomePage() {
               </a>
               .
             </p>
+            <div className="mt-6">
+              <PayRail />
+            </div>
             <div className="mt-8">
               <ActionRow dashboard={dashboard} />
             </div>
@@ -116,7 +120,10 @@ export default async function HomePage() {
                 key={vertical.name}
                 className="rounded-3xl border border-line bg-white p-5 shadow-[0_18px_50px_-36px_rgba(16,20,40,0.65)]"
               >
-                <h3 className="text-lg font-semibold">{vertical.name}</h3>
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-soft text-blue">
+                  <Mark name={vertical.name} />
+                </span>
+                <h3 className="mt-4 text-lg font-semibold">{vertical.name}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted">{vertical.body}</p>
               </li>
             ))}

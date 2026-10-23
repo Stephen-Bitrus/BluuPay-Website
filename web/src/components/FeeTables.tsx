@@ -1,4 +1,5 @@
 import type { Provider } from "@/content/site";
+import { channelMark, Mark } from "@/components/Icons";
 
 function Table({
   caption,
@@ -61,6 +62,9 @@ export function FeeTables({ providers }: { providers: Provider[] }) {
             <div className="grid gap-3 px-5 py-4 sm:grid-cols-3 sm:px-8">
               {provider.collections.map((row) => (
                 <article key={row.channel} className="rounded-2xl bg-paper p-4">
+                  <span className={`mb-3 grid h-9 w-9 place-items-center rounded-xl ${instant ? "bg-night text-white" : "bg-blue-soft text-blue"}`}>
+                    <Mark name={channelMark(row.channel)} className="h-4 w-4" />
+                  </span>
                   <h3 className="text-sm font-medium text-muted">{row.channel}</h3>
                   <p className="mt-2 text-xl font-semibold tabular-nums tracking-tight">{row.fee}</p>
                   <p className="mt-2 text-sm leading-5 text-muted">{row.note}</p>

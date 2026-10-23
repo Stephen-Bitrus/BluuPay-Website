@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Faq, Feature, Provider } from "@/content/site";
 import { groups, journey, site } from "@/content/site";
-import { CheckIcon, ClockIcon, GroupIcon } from "@/components/Icons";
+import { CheckIcon, ClockIcon, GroupIcon, Mark, ShopScene } from "@/components/Icons";
 import { btnGhostOnDark, btnOnDark, btnPrimary, btnSecondary } from "@/lib/ui";
 
 export function Crumbs({ current }: { current: string }) {
@@ -57,9 +57,12 @@ export function Journey() {
           key={item.step}
           className="rounded-3xl border border-line bg-white p-5 shadow-[0_18px_50px_-36px_rgba(16,20,40,0.7)] transition duration-200 motion-safe:hover:-translate-y-0.5"
         >
-          <p className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-soft text-sm font-semibold tabular-nums text-blue">
-            {item.step}
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-soft text-blue">
+              <Mark name={item.title} />
+            </p>
+            <p className="text-sm font-semibold tabular-nums text-blue">{item.step}</p>
+          </div>
           <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
           <p className="mt-2 text-sm leading-6 text-muted">{item.body}</p>
         </li>
@@ -90,7 +93,12 @@ export function FeatureGroups({ features }: { features: Feature[] }) {
                   key={feature.title}
                   className={`rounded-3xl border border-line bg-white p-5 shadow-[0_18px_50px_-36px_rgba(16,20,40,0.65)] transition duration-200 motion-safe:hover:-translate-y-0.5 ${index === 0 ? "md:col-span-2 md:p-7" : ""}`}
                 >
-                  <h3 className={`font-semibold ${index === 0 ? "text-xl" : "text-lg"}`}>{feature.title}</h3>
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-soft text-blue">
+                      <Mark name={feature.title} className="h-5 w-5" />
+                    </span>
+                    <h3 className={`font-semibold ${index === 0 ? "text-xl" : "text-lg"}`}>{feature.title}</h3>
+                  </div>
                   <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">{feature.body}</p>
                 </li>
               ))}
@@ -147,6 +155,7 @@ export function Stories({ stories }: { stories: { quote: string; name: string; p
               key={story.name}
               className={`rounded-3xl border border-white/10 p-6 sm:p-8 ${index === 0 ? "bg-white text-ink lg:row-span-1" : "bg-white/5"}`}
             >
+              <Mark name="quote" className={`mb-4 h-7 w-7 ${index === 0 ? "text-blue" : "text-white/70"}`} />
               <blockquote className={`leading-snug ${index === 0 ? "text-2xl font-semibold tracking-tight sm:text-3xl" : "text-xl"}`}>
                 “{story.quote}”
               </blockquote>
@@ -195,9 +204,14 @@ export function SettlementChoice({ providers }: { providers: Provider[] }) {
             key={provider.id}
             className={`flex flex-col rounded-[1.75rem] border p-6 sm:p-8 ${instant ? "border-night bg-night text-white" : "border-line bg-white"}`}
           >
-            <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${instant ? "text-white/60" : "text-blue"}`}>
-              {provider.settlement}
-            </p>
+            <div className="flex items-center gap-3">
+              <span className={`grid h-11 w-11 place-items-center rounded-2xl ${instant ? "bg-white/10 text-white" : "bg-blue-soft text-blue"}`}>
+                <Mark name={instant ? "instant" : "nextday"} />
+              </span>
+              <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${instant ? "text-white/60" : "text-blue"}`}>
+                {provider.settlement}
+              </p>
+            </div>
             <h3 className="mt-3 text-2xl font-semibold tracking-tight">{provider.name}</h3>
             <p className={`mt-3 flex-1 text-sm leading-6 ${instant ? "text-white/75" : "text-muted"}`}>{provider.summary}</p>
             <p className="mt-6 text-lg font-semibold tabular-nums">{provider.collections[0]?.fee}</p>
@@ -276,13 +290,16 @@ export function CtaBand({ dashboard }: { dashboard: string }) {
             Create the business on the dashboard, add products, and record the next sale. A terminal is not required.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <a href={dashboard} className={`${btnOnDark} px-5 py-3`}>
-            Get started free
-          </a>
-          <Link href="/book-a-demo" className={`${btnGhostOnDark} px-5 py-3`}>
-            Book a demo
-          </Link>
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end">
+          <ShopScene className="h-28 w-40 text-white/90 sm:h-36 sm:w-52" />
+          <div className="flex flex-wrap gap-3">
+            <a href={dashboard} className={`${btnOnDark} px-5 py-3`}>
+              Get started free
+            </a>
+            <Link href="/book-a-demo" className={`${btnGhostOnDark} px-5 py-3`}>
+              Book a demo
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -300,9 +317,14 @@ export function ProofBar() {
     <section aria-label="What is available today" className="border-b border-line bg-paper">
       <ul className="mx-auto grid max-w-6xl gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
         {facts.map(([title, body]) => (
-          <li key={title} className="bg-paper px-4 py-5">
-            <p className="text-base font-semibold">{title}</p>
-            <p className="mt-1 text-sm text-muted">{body}</p>
+          <li key={title} className="flex gap-3 bg-paper px-4 py-5">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-blue">
+              <Mark name={title} />
+            </span>
+            <span>
+              <span className="block text-base font-semibold">{title}</span>
+              <span className="mt-1 block text-sm text-muted">{body}</span>
+            </span>
           </li>
         ))}
       </ul>
