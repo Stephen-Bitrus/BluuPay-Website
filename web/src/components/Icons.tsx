@@ -364,14 +364,11 @@ export function ClockIcon({ className = "h-4 w-4" }: { className?: string }) {
 
 export function PayRail() {
   const items = [
-    ["transfer", "Transfer"],
-    ["card", "Card"],
-    ["ussd", "USSD"],
+    ["transfer", "Bank transfer"],
     ["wallet", "Wallet"],
-    ["cash", "Cash"],
   ] as const;
   return (
-    <ul className="flex flex-wrap gap-2" aria-label="Ways to take payment">
+    <ul className="stagger flex flex-wrap gap-2" aria-label="Priced collection channels">
       {items.map(([name, label]) => (
         <li
           key={name}

@@ -114,7 +114,7 @@ export default async function HomePage() {
               All solutions
             </Link>
           </div>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="stagger mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {content.verticals.slice(0, 6).map((vertical) => (
               <li
                 key={vertical.name}

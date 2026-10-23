@@ -59,7 +59,7 @@ export function FeeTables({ providers }: { providers: Provider[] }) {
             <div className="px-5 pt-6 sm:px-8">
               <h3 className="text-base font-semibold">Collections</h3>
             </div>
-            <div className="grid gap-3 px-5 py-4 sm:grid-cols-3 sm:px-8">
+            <div className="stagger grid gap-3 px-5 py-4 sm:grid-cols-2 sm:px-8">
               {provider.collections.map((row) => (
                 <article key={row.channel} className="rounded-2xl bg-paper p-4">
                   <span className={`mb-3 grid h-9 w-9 place-items-center rounded-xl ${instant ? "bg-night text-white" : "bg-blue-soft text-blue"}`}>

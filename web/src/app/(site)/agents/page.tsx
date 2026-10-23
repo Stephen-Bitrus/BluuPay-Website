@@ -1,3 +1,4 @@
+import { ShopScene } from "@/components/Icons";
 import { LeadForm } from "@/components/LeadForm";
 import { JsonLd } from "@/components/JsonLd";
 import { Crumbs } from "@/components/Sections";
@@ -28,7 +29,8 @@ export default function AgentsPage() {
           <p className="text-lg leading-8 text-muted">
             Agents help shop owners create an account, add products, and record the first sales. Commission terms are agreed when you are accepted. This page does not publish a rate.
           </p>
-          <ul className="grid gap-3">
+          <ShopScene className="float-y h-28 w-40 text-blue" />
+          <ul className="stagger grid gap-3">
             {points.map((point) => (
               <li key={point} className="rounded-2xl border border-line bg-white px-4 py-4 text-sm leading-6">
                 {point}

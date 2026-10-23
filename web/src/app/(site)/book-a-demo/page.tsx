@@ -1,3 +1,4 @@
+import { RecordScene } from "@/components/Illustrations";
 import { LeadForm } from "@/components/LeadForm";
 import { JsonLd } from "@/components/JsonLd";
 import { Crumbs } from "@/components/Sections";
@@ -29,7 +30,8 @@ export default function DemoPage() {
           <p className="text-lg leading-8 text-muted">
             Tell us what you sell. We will walk through sales, payments, stock, and the report you would read at close. The demo uses what is live today.
           </p>
-          <ul className="grid gap-3">
+          <RecordScene />
+          <ul className="stagger grid gap-3">
             {points.map((point) => (
               <li key={point} className="rounded-2xl border border-line bg-white px-4 py-3 text-sm font-medium">
                 {point}

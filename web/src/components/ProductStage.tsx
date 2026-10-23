@@ -37,7 +37,7 @@ const frame =
 export function ProductStage() {
   const shot = shots[0];
   return (
-    <figure className={frame}>
+    <figure className={`${frame} rise-in`}>
       <Image
         src={shot.src}
         alt={shot.alt}
@@ -66,7 +66,7 @@ export function ProductGallery({ include = ["pos", "products", "sales"] }: { inc
         <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">
           These are from a live BluuPay dashboard.
         </p>
-        <ul className={`mt-8 grid gap-6 ${visible.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+        <ul className={`stagger mt-8 grid gap-6 ${visible.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
           {visible.map((shot) => (
             <li key={shot.id}>
               <figure className={frame}>

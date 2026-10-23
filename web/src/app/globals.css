@@ -64,8 +64,72 @@ body {
   top: 1rem;
 }
 
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+
+.rise-in,
+.stagger > * {
+  animation: rise-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.stagger > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 160ms;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 240ms;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 320ms;
+}
+.stagger > *:nth-child(6) {
+  animation-delay: 400ms;
+}
+
+.float-y {
+  animation: float-y 5.5s ease-in-out infinite;
+}
+
+.flow-line {
+  stroke-dasharray: 6 8;
+  animation: flow-dash 1.6s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .rise-in,
+  .stagger > *,
+  .float-y,
+  .flow-line {
+    animation: none;
   }
 }

@@ -25,7 +25,7 @@ export default async function SolutionsPage() {
         lede="BluuPay serves the businesses that already sell in Nigeria. Each one gets sales, stock, payments, and profit without a different system per counter."
       />
       <div className="bg-paper">
-        <ul className="mx-auto grid max-w-6xl gap-4 px-4 py-16 sm:grid-cols-2 sm:py-20">
+        <ul className="stagger mx-auto grid max-w-6xl gap-4 px-4 py-16 sm:grid-cols-2 sm:py-20">
           {content.verticals.map((vertical, index) => (
             <li
               key={vertical.name}
@@ -40,7 +40,7 @@ export default async function SolutionsPage() {
                 <h2 className={`mt-2 font-semibold tracking-tight ${index === 0 ? "text-3xl" : "text-xl"}`}>{vertical.name}</h2>
                 <p className="mt-3 max-w-2xl leading-7 text-muted">{vertical.body}</p>
               </div>
-              {index === 0 ? <ShopScene className="mt-6 h-32 w-48 text-blue sm:mt-0 sm:h-40 sm:w-56" /> : null}
+              {index === 0 ? <ShopScene className="float-y mt-6 h-32 w-48 text-blue sm:mt-0 sm:h-40 sm:w-56" /> : null}
             </li>
           ))}
         </ul>

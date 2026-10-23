@@ -36,7 +36,7 @@ export default function MobilePage() {
           <article className="rounded-[1.75rem] border border-line bg-white p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue">Live</p>
             <h2 className="mt-2 text-2xl font-semibold">Available now</h2>
-            <ul className="mt-4 grid gap-3 text-sm leading-6 text-muted">
+            <ul className="stagger mt-4 grid gap-3 text-sm leading-6 text-muted">
               {[
                 ["pos", "Point of sale on the phone"],
                 ["transfer", "Payments, stock, invoices, and customers"],

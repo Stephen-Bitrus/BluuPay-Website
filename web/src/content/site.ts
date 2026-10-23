@@ -65,7 +65,7 @@ export const liveFeatures: Feature[] = [
     group: "Sell",
     status: "live",
     title: "Payments",
-    body: "Record bank transfer, card, USSD, wallet, and cash against the product that was sold. Priced collection channels are listed on the pricing page.",
+    body: "Record a bank transfer or a wallet payment against the product that was sold. Those are the priced collection channels on the pricing page.",
   },
   {
     group: "Sell",
@@ -83,7 +83,7 @@ export const liveFeatures: Feature[] = [
     group: "Get paid",
     status: "live",
     title: "Nomba MFB, instant",
-    body: "Collections through Nomba MFB settle instantly, including bank transfer, card, USSD, web, and wallet.",
+    body: "Collections through Nomba MFB settle instantly, on bank transfer and wallet payment.",
   },
   {
     group: "Get paid",
@@ -264,11 +264,6 @@ export const providers: Provider[] = [
         note: "API, SDK, or hosted checkout",
       },
       {
-        channel: "Payment gateway",
-        fee: "2.5% capped at ₦3,000",
-        note: "Card, USSD, or web",
-      },
-      {
         channel: "Wallet payment",
         fee: "1.5% flat",
         note: "Instant settlement",
@@ -297,17 +292,12 @@ export const providers: Provider[] = [
     name: "Nomba MFB",
     settlement: "Instant",
     summary:
-      "Nomba MFB collections settle instantly, including bank transfer, the payment gateway, and wallet payments.",
+      "Nomba MFB collections settle instantly on bank transfer and wallet payment.",
     collections: [
       {
         channel: "Bank transfer (virtual account)",
         fee: "2.2% capped at ₦2,000",
         note: "API, SDK, or hosted checkout",
-      },
-      {
-        channel: "Payment gateway",
-        fee: "2.5% capped at ₦3,000",
-        note: "Card, USSD, or web",
       },
       {
         channel: "Wallet payment",
@@ -408,12 +398,12 @@ export const pricingFaqs: Faq[] = [
   {
     question: "How much does BluuPay charge?",
     answer:
-      "Collection fees depend on the provider and the channel. With Palmpay, a bank transfer is 1.9% capped at ₦2,000, a card, USSD, or web payment is 2.5% capped at ₦3,000, and a wallet payment is 1.5% flat. With Nomba MFB, a bank transfer is 2.2% capped at ₦2,000, a card, USSD, or web payment is 2.5% capped at ₦3,000, and a wallet payment is 2% flat. Payout fees depend on the amount and where the money is sent. The tables on this page list every band.",
+      "Collection fees depend on the provider and the channel. With Palmpay, a bank transfer is 1.9% capped at ₦2,000 and a wallet payment is 1.5% flat. With Nomba MFB, a bank transfer is 2.2% capped at ₦2,000 and a wallet payment is 2% flat. Payout fees depend on the amount and where the money is sent. The tables on this page list every band.",
   },
   {
     question: "How does Palmpay settlement differ from Nomba?",
     answer:
-      "Palmpay settles on the next business day (T+1). A Palmpay wallet payment settles instantly, and that row is marked in the Palmpay table. Nomba MFB settles instantly on bank transfer, the payment gateway, and wallet.",
+      "Palmpay bank transfers settle on the next business day (T+1). A Palmpay wallet payment settles instantly, and that row is marked in the Palmpay table. Nomba MFB settles instantly on bank transfer and wallet.",
   },
   {
     question: "Can I pass the fee to my customer?",

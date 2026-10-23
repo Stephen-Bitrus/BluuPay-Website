@@ -11,7 +11,7 @@ export function getSanityClient(): SanityClient | null {
     projectId,
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
     apiVersion: "2026-10-22",
-    useCdn: true,
+    useCdn: false,
     perspective: "published",
   });
 }

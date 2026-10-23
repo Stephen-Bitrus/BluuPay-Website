@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { RecordScene } from "@/components/Illustrations";
 import { ProductGallery } from "@/components/ProductStage";
 import { ComingSoon, CtaBand, FeatureGroups, PageHero } from "@/components/Sections";
 import { getContent } from "@/lib/content";
@@ -23,6 +24,7 @@ export default async function ProductPage() {
         eyebrow="Product"
         title="Everything the shop does, on one record"
         lede="Sell at the counter or in the mobile app. Get paid through Palmpay or Nomba MFB. Run stock, invoices, customers, expenses, tax, staff, and outlets from the same place."
+        aside={<RecordScene />}
       />
       <ProductGallery />
       <div className="bg-paper">

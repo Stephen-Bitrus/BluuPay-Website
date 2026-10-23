@@ -29,21 +29,26 @@ export function PageHero({
   title,
   lede,
   children,
+  aside,
 }: {
   crumb: string;
   eyebrow?: string;
   title: string;
   lede: string;
   children?: ReactNode;
+  aside?: ReactNode;
 }) {
   return (
     <header className="hero-wash border-b border-line bg-white">
-      <div className="mx-auto grid max-w-6xl gap-5 px-4 py-14 sm:py-20">
-        <Crumbs current={crumb} />
-        {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">{eyebrow}</p> : null}
-        <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl">{title}</h1>
-        <p className="max-w-2xl text-lg leading-8 text-muted">{lede}</p>
-        {children}
+      <div className={`mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-20 ${aside ? "items-center lg:grid-cols-[1.05fr_0.95fr]" : ""}`}>
+        <div className="grid gap-5">
+          <Crumbs current={crumb} />
+          {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">{eyebrow}</p> : null}
+          <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl">{title}</h1>
+          <p className="max-w-2xl text-lg leading-8 text-muted">{lede}</p>
+          {children}
+        </div>
+        {aside ? <div className="rise-in">{aside}</div> : null}
       </div>
     </header>
   );
@@ -51,7 +56,7 @@ export function PageHero({
 
 export function Journey() {
   return (
-    <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ol className="stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {journey.map((item) => (
         <li
           key={item.step}
@@ -87,7 +92,7 @@ export function FeatureGroups({ features }: { features: Feature[] }) {
                 {group}
               </h2>
             </div>
-            <ul className="mt-5 grid gap-4 md:grid-cols-2">
+            <ul className="stagger mt-5 grid gap-4 md:grid-cols-2">
               {items.map((feature, index) => (
                 <li
                   key={feature.title}
@@ -291,7 +296,7 @@ export function CtaBand({ dashboard }: { dashboard: string }) {
           </p>
         </div>
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end">
-          <ShopScene className="h-28 w-40 text-white/90 sm:h-36 sm:w-52" />
+          <ShopScene className="float-y h-28 w-40 text-white/90 sm:h-36 sm:w-52" />
           <div className="flex flex-wrap gap-3">
             <a href={dashboard} className={`${btnOnDark} px-5 py-3`}>
               Get started free

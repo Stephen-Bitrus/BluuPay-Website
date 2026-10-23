@@ -1,4 +1,5 @@
 import { FeeTables } from "@/components/FeeTables";
+import { CollectionScene } from "@/components/Illustrations";
 import { JsonLd } from "@/components/JsonLd";
 import { CtaBand, FaqList, PageHero, SettlementChoice } from "@/components/Sections";
 import { getContent } from "@/lib/content";
@@ -9,7 +10,7 @@ export const revalidate = 3600;
 
 export const metadata = pageMeta(
   "Pricing",
-  "Palmpay settles the next business day. Nomba MFB settles instantly. Compare BluuPay collection and payout fees, and choose to absorb the fee or pass it on.",
+  "Collections are a bank transfer to a virtual account, or a wallet payment. Palmpay bank transfers settle the next business day. Nomba MFB settles instantly. Wallet payments settle instantly with either provider.",
   "/pricing",
 );
 
@@ -22,7 +23,8 @@ export default async function PricingPage() {
         crumb="Pricing"
         eyebrow="Pricing"
         title="How much BluuPay charges"
-        lede="Two providers. Palmpay settles on the next business day (T+1). Nomba MFB settles instantly. A Palmpay wallet payment is the exception and settles instantly. You can absorb the collection fee or pass it through to the customer. The tables are BluuPay’s fees either way."
+        lede="Collections are a bank transfer to a virtual account, or a wallet payment. Palmpay bank transfers settle the next business day. Nomba MFB settles instantly. Wallet payments settle instantly with either provider. You can absorb the fee or pass it on. The tables are BluuPay’s fees either way."
+        aside={<CollectionScene />}
       />
       <div className="bg-paper">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:py-20">

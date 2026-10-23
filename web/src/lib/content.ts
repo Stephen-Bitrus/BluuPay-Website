@@ -50,11 +50,15 @@ type Remote = {
   providers?: (Omit<Provider, "id"> & { id?: string })[];
 };
 
+function liveCollections(rows: Provider["collections"] | undefined) {
+  return (rows ?? []).filter((row) => /virtual account|wallet payment/i.test(row.channel));
+}
+
 function withIds(items: Omit<Provider, "id">[]): Provider[] {
   return items.map((provider, index) => ({
     id: provider.name.toLowerCase().includes("nomba") ? "nomba" : index === 0 ? "palmpay" : `provider-${index}`,
     ...provider,
-    collections: provider.collections ?? [],
+    collections: liveCollections(provider.collections),
     payouts: provider.payouts ?? [],
   }));
 }
