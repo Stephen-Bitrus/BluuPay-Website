@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { ProductGallery } from "@/components/ProductStage";
 import { ComingSoon, CtaBand, FeatureGroups, PageHero } from "@/components/Sections";
 import { getContent } from "@/lib/content";
 import { breadcrumbSchema, softwareSchema } from "@/lib/schema";
@@ -23,6 +24,7 @@ export default async function ProductPage() {
         title="Everything the shop does, on one record"
         lede="Sell at the counter or in the mobile app. Get paid through Palmpay or Nomba MFB. Run stock, invoices, customers, expenses, tax, staff, and outlets from the same place."
       />
+      <ProductGallery />
       <div className="bg-paper">
         <div className="mx-auto grid max-w-6xl gap-16 px-4 py-16 sm:py-20">
           <FeatureGroups features={content.liveFeatures} />

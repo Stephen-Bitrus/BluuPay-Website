@@ -1,40 +1,91 @@
-const lines = [
-  ["Sale", "Tied to the product that left the shelf"],
-  ["Payment", "Transfer, card, USSD, wallet, or cash"],
-  ["Stock", "Updated for that outlet"],
-  ["Profit", "Calculated from your cost and the fee"],
+import Image from "next/image";
+
+const shots = [
+  {
+    id: "pos",
+    src: "/product/pos.webp",
+    width: 1800,
+    height: 1125,
+    title: "Point of sale",
+    body: "Search the shelf, see the price and the stock, and build the order. The order on this screen is empty.",
+    alt: "BluuPay point of sale with hair products, prices, stock counts, and an empty current order.",
+  },
+  {
+    id: "products",
+    src: "/product/products.webp",
+    width: 1800,
+    height: 1125,
+    title: "Products",
+    body: "The catalogue lists each product with its price and how many are in stock.",
+    alt: "BluuPay product catalogue with prices and stock counts for hair products.",
+  },
+  {
+    id: "sales",
+    src: "/product/sales.webp",
+    width: 1800,
+    height: 1125,
+    title: "Sales",
+    body: "Sales insights show today, this week, and this month after returns and refunds.",
+    alt: "BluuPay sales insights with net sales for today, this week, and this month.",
+  },
 ] as const;
 
+const frame =
+  "overflow-hidden rounded-[1.75rem] border border-line bg-white shadow-[0_30px_80px_-36px_rgba(8,12,40,0.55)]";
+
 export function ProductStage() {
+  const shot = shots[0];
   return (
-    <aside className="relative" aria-label="What a recorded sale contains">
-      <div className="relative overflow-hidden rounded-[1.75rem] bg-night p-3 text-white shadow-[0_30px_80px_-36px_rgba(8,12,40,0.85)] sm:p-4">
-        <div className="rounded-[1.25rem] border border-white/10 bg-[#12183a]">
-          <div className="flex items-start justify-between gap-4 border-b border-white/10 px-4 py-4">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">Sample sale</p>
-              <p className="mt-1 text-sm font-semibold">What BluuPay writes down</p>
-            </div>
-            <span className="shrink-0 rounded-full bg-emerald-400/15 px-2.5 py-1 text-[11px] font-semibold text-emerald-200">Recorded</span>
-          </div>
-          <ol className="grid gap-0 px-4">
-            {lines.map(([title, body], index) => (
-              <li key={title} className="flex gap-3 border-b border-white/10 py-3.5 last:border-b-0">
-                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/10 text-[11px] font-semibold tabular-nums">
-                  {index + 1}
-                </span>
-                <span>
-                  <span className="block text-sm font-semibold">{title}</span>
-                  <span className="mt-0.5 block text-sm leading-5 text-white/65">{body}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-          <p className="border-t border-white/10 px-4 py-3 text-sm leading-6 text-white/65">
-            Staff, invoices, customers, expenses, and tax stay on the same record.
-          </p>
-        </div>
+    <figure className={frame}>
+      <Image
+        src={shot.src}
+        alt={shot.alt}
+        width={shot.width}
+        height={shot.height}
+        priority
+        sizes="(min-width: 1024px) 540px, 100vw"
+        className="h-auto w-full"
+      />
+      <figcaption className="border-t border-line px-4 py-3 text-sm leading-6 text-muted">
+        Dashboard point of sale. The order on this screen is empty.
+      </figcaption>
+    </figure>
+  );
+}
+
+export function ProductGallery({ include = ["pos", "products", "sales"] }: { include?: readonly string[] }) {
+  const visible = shots.filter((shot) => include.includes(shot.id));
+  return (
+    <section aria-labelledby="product-screens-title" className="bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">In the dashboard</p>
+        <h2 id="product-screens-title" className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
+          The screens a shop opens
+        </h2>
+        <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">
+          These are from a live BluuPay dashboard.
+        </p>
+        <ul className={`mt-8 grid gap-6 ${visible.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+          {visible.map((shot) => (
+            <li key={shot.id}>
+              <figure className={frame}>
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  sizes={visible.length > 2 ? "(min-width: 1024px) 360px, 100vw" : "(min-width: 1024px) 540px, 100vw"}
+                  className="h-auto w-full"
+                />
+                <figcaption className="border-t border-line px-4 py-3">
+                  <span className="block text-sm font-semibold">{shot.title}</span>
+                  <span className="mt-1 block text-sm leading-6 text-muted">{shot.body}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </div>
-    </aside>
+    </section>
   );
 }

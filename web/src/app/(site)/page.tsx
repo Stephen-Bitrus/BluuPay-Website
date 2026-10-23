@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
-import { ProductStage } from "@/components/ProductStage";
+import { ProductGallery, ProductStage } from "@/components/ProductStage";
 import {
   ActionRow,
   ComingSoon,
@@ -53,8 +53,9 @@ export default async function HomePage() {
         </div>
       </section>
       <ProofBar />
+      <ProductGallery include={["products", "sales"]} />
 
-      <section aria-labelledby="journey-title" className="bg-white">
+      <section aria-labelledby="journey-title" className="border-t border-line bg-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">How it works</p>
           <h2 id="journey-title" className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
