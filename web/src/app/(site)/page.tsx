@@ -20,7 +20,7 @@ import { getContent } from "@/lib/content";
 import { faqSchema, organizationSchema, softwareSchema, websiteSchema } from "@/lib/schema";
 import { dashboardUrl, pageMeta } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   ...pageMeta("BluuPay – Sell Smarter, Grow Faster", site.description, "/"),

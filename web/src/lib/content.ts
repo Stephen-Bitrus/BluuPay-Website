@@ -67,7 +67,7 @@ export async function getContent(): Promise<SiteContent> {
   const client = getSanityClient();
   if (!client) return seed;
   try {
-    const remote = await client.fetch<Remote>(query);
+    const remote = await client.fetch<Remote>(query, {}, { next: { tags: ["sanity"], revalidate: 60 } });
     const features = (remote.features ?? []).filter((item) => item.title && item.body);
     const general = (remote.faqs ?? []).filter((item) => item.placement !== "pricing");
     const pricing = (remote.faqs ?? []).filter((item) => item.placement === "pricing");

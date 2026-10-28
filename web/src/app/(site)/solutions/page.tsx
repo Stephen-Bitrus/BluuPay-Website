@@ -5,7 +5,7 @@ import { getContent } from "@/lib/content";
 import { breadcrumbSchema } from "@/lib/schema";
 import { dashboardUrl, pageMeta } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata = pageMeta(
   "Solutions",

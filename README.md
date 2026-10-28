@@ -191,7 +191,7 @@ Lead fields are read-only. They are created by the form, not typed in by an edit
 
 `getContent()` in `web/src/lib/content.ts` loads those documents for Home, Product, Solutions, and Pricing. If Sanity is unset, the query fails, or a list comes back empty, that list falls back to `web/src/content/site.ts`. Identity, navigation, the journey steps, legal pages, and the mobile and agent page copy stay in code.
 
-Home, Product, Solutions, and Pricing revalidate at most every 3600 seconds. After a Studio publish, call the revalidate webhook or wait up to an hour.
+Home, Product, Solutions, and Pricing revalidate at most every 60 seconds. A Studio publish also calls the revalidate webhook, which refreshes those pages immediately.
 
 ### Seed
 
@@ -199,9 +199,14 @@ Home, Product, Solutions, and Pricing revalidate at most every 3600 seconds. Aft
 
 ### Revalidate webhook
 
-`POST /api/revalidate` with header `x-revalidate-secret` set to `SANITY_REVALIDATE_SECRET`. A match calls `revalidatePath("/", "layout")` and returns `{ ok: true }`. A missing or wrong secret returns 401.
+`POST /api/revalidate` accepts either of these:
 
-In Sanity, add a webhook to `https://bluupay.co/api/revalidate` (or the Vercel host until the domain is cut over) on publish, and send that header. Put the same secret in the Vercel environment.
+- Header `x-revalidate-secret` set to `SANITY_REVALIDATE_SECRET`
+- A Sanity webhook signature (`sanity-webhook-signature`) for that same secret
+
+A match refreshes `/`, `/product`, `/solutions`, and `/pricing`, and returns `{ ok: true }`. A missing or wrong secret returns 401.
+
+The webhook is `https://www.bluupay.co/api/revalidate`. Use `www`. A POST to `https://bluupay.co/api/revalidate` is redirected, and Sanity does not follow that redirect, so a webhook pointed at the apex never refreshes the site. The webhook fires when a feature, vertical, story, FAQ, or payment provider is published. It sends the signature and the `x-revalidate-secret` header. Draft edits do not fire it.
 
 ### Studio login on a public host
 
@@ -333,6 +338,6 @@ Every response sets:
 
 1. Change the fact in `web/src/content/site.ts` (and `legal.ts` if it is a legal page).
 2. If the change is a feature, vertical, story, FAQ, or fee, run `npm run seed` or publish the same edit in Studio.
-3. Trigger `/api/revalidate`, or wait for the hour cache.
+3. Publish in Studio. The webhook refreshes the site. If it does not fire, the page updates within a minute.
 4. Read the page. Fees on screen should match the tables in this file.
 5. Commit on `cursor/bluupay-ui-refresh-6bdd` and push to GitHub. Vercel builds that branch.
