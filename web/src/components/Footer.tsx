@@ -21,6 +21,7 @@ export function Footer({ dashboard }: { dashboard: string }) {
             <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
             <li><Link href="/mobile" className="hover:text-white">Mobile</Link></li>
             <li><Link href="/agents" className="hover:text-white">Agents</Link></li>
+            <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
           </ul>
         </div>
         <div>

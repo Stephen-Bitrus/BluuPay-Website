@@ -93,7 +93,7 @@ Old WordPress-style paths redirect permanently:
 | `/features` | `/product` |
 | `/about`, `/about-us` | `/` |
 | `/support`, `/contact` | `/book-a-demo` |
-| `/blog`, `/blog/*`, `/author/*` | `/` |
+| `/author/*` | `/` |
 | `/whatsapp` | `/product#coming-soon` |
 
 Trailing slashes are off. The `X-Powered-By` header is off.
@@ -206,7 +206,7 @@ Home, Product, Solutions, and Pricing revalidate at most every 60 seconds. A Stu
 
 A match refreshes `/`, `/product`, `/solutions`, and `/pricing`, and returns `{ ok: true }`. A missing or wrong secret returns 401.
 
-The webhook is `https://www.bluupay.co/api/revalidate`. Use `www`. A POST to `https://bluupay.co/api/revalidate` is redirected, and Sanity does not follow that redirect, so a webhook pointed at the apex never refreshes the site. The webhook fires when a feature, vertical, story, FAQ, or payment provider is published. It sends the signature and the `x-revalidate-secret` header. Draft edits do not fire it.
+The webhook is `https://www.bluupay.co/api/revalidate`. Use `www`. A POST to `https://bluupay.co/api/revalidate` is redirected, and Sanity does not follow that redirect, so a webhook pointed at the apex never refreshes the site. The webhook fires when a feature, vertical, story, FAQ, payment provider, or blog post is published. It sends the signature and the `x-revalidate-secret` header. Draft edits do not fire it.
 
 ### Studio login on a public host
 

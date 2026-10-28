@@ -72,6 +72,7 @@ export function buildLlmsTxt(): string {
     ["/pricing", "Pricing"],
     ["/mobile", "Mobile app"],
     ["/agents", "Agents"],
+    ["/blog", "Blog"],
     ["/book-a-demo", "Book a demo"],
     ["/privacy-policy", "Privacy policy"],
     ["/terms-of-service", "Terms of service"],

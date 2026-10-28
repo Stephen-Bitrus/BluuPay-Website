@@ -1,13 +1,23 @@
 import type { MetadataRoute } from "next";
 import { pages } from "@/content/site";
+import { getPosts } from "@/lib/posts";
 import { absoluteUrl } from "@/lib/seo";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  return pages.map((page) => ({
-    url: absoluteUrl(page.path),
-    lastModified: now,
-    changeFrequency: page.path === "/pricing" ? "weekly" : "monthly",
-    priority: page.path === "/" ? 1 : 0.7,
-  }));
+  const posts = await getPosts();
+  return [
+    ...pages.map((page) => ({
+      url: absoluteUrl(page.path),
+      lastModified: now,
+      changeFrequency: page.path === "/pricing" || page.path === "/blog" ? "weekly" : "monthly",
+      priority: page.path === "/" ? 1 : 0.7,
+    })),
+    ...posts.map((post) => ({
+      url: absoluteUrl(`/blog/${post.slug}`),
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
 }

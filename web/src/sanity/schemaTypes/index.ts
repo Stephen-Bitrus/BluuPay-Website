@@ -151,4 +151,75 @@ export const lead = defineType({
   },
 });
 
-export const schemaTypes = [lead, feature, vertical, story, faq, paymentProvider, legalPage];
+export const post = defineType({
+  name: "post",
+  title: "Post",
+  type: "document",
+  fields: [
+    defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
+    defineField({
+      name: "slug",
+      type: "slug",
+      options: { source: "title", maxLength: 80 },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({ name: "excerpt", type: "text", rows: 3, validation: (rule) => rule.required() }),
+    defineField({
+      name: "publishedAt",
+      title: "Published",
+      type: "datetime",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "author",
+      type: "string",
+      initialValue: "BluuPay",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "body",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Heading", value: "h2" },
+            { title: "Subheading", value: "h3" },
+          ],
+          lists: [
+            { title: "Bullet", value: "bullet" },
+            { title: "Numbered", value: "number" },
+          ],
+          marks: {
+            decorators: [
+              { title: "Strong", value: "strong" },
+              { title: "Emphasis", value: "em" },
+            ],
+            annotations: [
+              {
+                name: "link",
+                type: "object",
+                title: "Link",
+                fields: [
+                  defineField({
+                    name: "href",
+                    type: "url",
+                    validation: (rule) => rule.uri({ allowRelative: true, scheme: ["http", "https", "mailto"] }),
+                  }),
+                ],
+              },
+            ],
+          },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+  orderings: [{ title: "Published", name: "publishedAtDesc", by: [{ field: "publishedAt", direction: "desc" }] }],
+  preview: {
+    select: { title: "title", subtitle: "publishedAt" },
+  },
+});
+
+export const schemaTypes = [lead, post, feature, vertical, story, faq, paymentProvider, legalPage];

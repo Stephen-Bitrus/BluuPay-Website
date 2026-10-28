@@ -423,6 +423,7 @@ export const nav = [
   { href: "/pricing", label: "Pricing" },
   { href: "/mobile", label: "Mobile" },
   { href: "/agents", label: "Agents" },
+  { href: "/blog", label: "Blog" },
 ] as const;
 
 export const pages = [
@@ -432,6 +433,7 @@ export const pages = [
   { path: "/pricing", title: "Pricing" },
   { path: "/mobile", title: "Mobile" },
   { path: "/agents", title: "Agents" },
+  { path: "/blog", title: "Blog" },
   { path: "/book-a-demo", title: "Book a demo" },
   { path: "/privacy-policy", title: "Privacy policy" },
   { path: "/terms-of-service", title: "Terms of service" },

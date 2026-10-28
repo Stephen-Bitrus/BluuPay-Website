@@ -18,6 +18,7 @@ import {
 import { site } from "@/content/site";
 import { getContent } from "@/lib/content";
 import { faqSchema, organizationSchema, softwareSchema, websiteSchema } from "@/lib/schema";
+import { formatPostDate, getPosts } from "@/lib/posts";
 import { dashboardUrl, pageMeta } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const content = await getContent();
+  const [content, posts] = await Promise.all([getContent(), getPosts()]);
   const dashboard = dashboardUrl();
   return (
     <>
@@ -138,6 +139,36 @@ export default async function HomePage() {
           <FaqList items={content.faqs} />
         </div>
       </div>
+      <section aria-labelledby="blog-title" className="border-t border-line bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">Blog</p>
+              <h2 id="blog-title" className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
+                Notes for the shop
+              </h2>
+            </div>
+            <Link href="/blog" className="text-sm font-semibold text-blue">
+              All notes
+            </Link>
+          </div>
+          <ul className="mt-8 grid gap-4 lg:grid-cols-3">
+            {posts.slice(0, 3).map((post) => (
+              <li key={post.slug} className="rounded-3xl border border-line p-5">
+                <p className="text-sm font-semibold text-blue">
+                  <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
+                </p>
+                <h3 className="mt-3 text-lg font-semibold">
+                  <Link href={`/blog/${post.slug}`} className="hover:text-blue">
+                    {post.title}
+                  </Link>
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{post.excerpt}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
       <Stories stories={content.stories} />
       <CtaBand dashboard={dashboard} />
     </>

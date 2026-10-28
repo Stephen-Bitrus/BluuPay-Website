@@ -1,4 +1,5 @@
 import { createClient } from "@sanity/client";
+import { posts } from "../src/content/posts";
 import { faqs, liveFeatures, pricingFaqs, providers, soonFeatures, stories, verticals } from "../src/content/site";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -63,6 +64,16 @@ async function main() {
       collections: provider.collections.map((row) => ({ _type: "feeRow", ...row })),
       payouts: provider.payouts.map((row) => ({ _type: "feeRow", ...row })),
       order,
+    })),
+    ...posts.map((post) => ({
+      _id: `post-${post.slug}`,
+      _type: "post",
+      title: post.title,
+      slug: { _type: "slug", current: post.slug },
+      excerpt: post.excerpt,
+      publishedAt: post.publishedAt,
+      author: post.author,
+      body: post.body,
     })),
   ];
 

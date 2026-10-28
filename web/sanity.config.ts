@@ -24,7 +24,9 @@ export default defineConfig({
               .title("Agent applications")
               .child(S.documentList().title("Agent applications").filter('_type == "lead" && kind == "agent"')),
             S.divider(),
-            ...S.documentTypeListItems().filter((item) => item.getId() !== "lead"),
+            S.listItem().title("Posts").child(S.documentTypeList("post").title("Posts")),
+            S.divider(),
+            ...S.documentTypeListItems().filter((item) => !["lead", "post"].includes(item.getId() || "")),
           ]),
     }),
   ],
