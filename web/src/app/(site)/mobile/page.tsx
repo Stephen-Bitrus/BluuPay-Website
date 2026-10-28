@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
-import { ProductStage } from "@/components/ProductStage";
+import { MobileShowcase } from "@/components/ProductStage";
 import { Crumbs, CtaBand } from "@/components/Sections";
 import { breadcrumbSchema } from "@/lib/schema";
 import { Mark } from "@/components/Icons";
@@ -19,8 +19,8 @@ export default function MobilePage() {
     <>
       <JsonLd data={breadcrumbSchema("Mobile", "/mobile")} />
       <section className="hero-wash border-b border-line bg-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 lg:grid-cols-2 lg:py-20">
-          <header className="grid gap-5">
+        <div className="mx-auto max-w-6xl px-4 py-14 lg:py-20">
+          <header className="grid max-w-2xl gap-5">
             <Crumbs current="Mobile" />
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue">Mobile</p>
             <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl">Sell from the phone you already have</h1>
@@ -28,7 +28,9 @@ export default function MobilePage() {
               The BluuPay mobile app is available to merchants today. Record the sale, take the payment, and check stock and profit without a terminal.
             </p>
           </header>
-          <ProductStage />
+          <div className="mt-10">
+            <MobileShowcase />
+          </div>
         </div>
       </section>
       <div className="bg-paper">

@@ -26,6 +26,13 @@ const marks: Record<string, ReactNode> = {
       <path d="M11 17.5h2" />
     </>
   ),
+  menu: (
+    <>
+      <path d="M4 7h16" />
+      <path d="M4 12h16" />
+      <path d="M4 17h16" />
+    </>
+  ),
   pos: (
     <>
       <rect x="3" y="4" width="18" height="12" rx="2" />
@@ -266,6 +273,7 @@ const aliases: Record<string, string> = {
   "Run the shop": "boxes",
   Grow: "chart",
   "Manage and grow": "chart",
+  Menu: "menu",
   "Point of sale": "pos",
   Payments: "transfer",
   "Mobile app": "phone",
