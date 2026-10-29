@@ -13,7 +13,11 @@ Contact:
 - `hello@bluupay.co` — general and form fallback
 - `legal@bluupay.co`
 - `privacy@bluupay.co`
-- [LinkedIn](https://www.linkedin.com/company/bluupay)
+- [X](https://x.com/bluupayhq)
+- [Instagram](https://instagram.com/bluupay.co)
+- [LinkedIn](https://linkedin.com/company/bluupay)
+- [Facebook](https://facebook.com/bluupay)
+- [TikTok](https://www.tiktok.com/@bluupayhq)
 
 A plain-text summary of the same public facts is served at `/llms.txt`. It is generated from `web/src/content/llms.ts` and `web/src/content/site.ts`.
 

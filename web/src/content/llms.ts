@@ -20,6 +20,7 @@ export function buildLlmsTxt(): string {
     `Website: ${site.url}`,
     `Merchant dashboard (sign up and sign in): ${site.dashboardUrl}`,
     `Email: ${site.emails.hello}`,
+    ...site.socials.map((item) => `${item.name}: ${item.href}`),
     "",
     "## What merchants can use today",
     "",

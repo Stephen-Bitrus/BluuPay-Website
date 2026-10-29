@@ -1,3 +1,11 @@
+const socials = [
+  { name: "X", href: "https://x.com/bluupayhq" },
+  { name: "Instagram", href: "https://instagram.com/bluupay.co" },
+  { name: "LinkedIn", href: "https://linkedin.com/company/bluupay" },
+  { name: "Facebook", href: "https://facebook.com/bluupay" },
+  { name: "TikTok", href: "https://www.tiktok.com/@bluupayhq" },
+] as const;
+
 export const site = {
   name: "BluuPay",
   tagline: "Sell Smarter. Grow Faster.",
@@ -9,7 +17,8 @@ export const site = {
     legal: "legal@bluupay.co",
     privacy: "privacy@bluupay.co",
   },
-  sameAs: ["https://www.linkedin.com/company/bluupay"],
+  socials,
+  sameAs: socials.map((item) => item.href),
   description:
     "BluuPay is the business record for Nigerian merchants. Every payment is tied to the product sold, then stock, invoices, customers, expenses, tax, and profit stay in one place across your outlets.",
 } as const;

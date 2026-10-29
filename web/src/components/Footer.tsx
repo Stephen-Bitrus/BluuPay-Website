@@ -12,6 +12,15 @@ export function Footer({ dashboard }: { dashboard: string }) {
           </span>
           <p className="mt-4 text-sm leading-6 text-white/70">{site.tagline}</p>
           <p className="mt-2 text-sm leading-6 text-white/70">For merchants in Nigeria.</p>
+          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+            {site.socials.map((item) => (
+              <li key={item.name}>
+                <a href={item.href} className="text-white/80 hover:text-white" target="_blank" rel="noopener noreferrer">
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         <div>
           <h2 className="text-sm font-semibold">Product</h2>
