@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { createClient } from "@sanity/client";
 import { posts } from "../src/content/posts";
 import { faqs, liveFeatures, pricingFaqs, providers, soonFeatures, stories, verticals } from "../src/content/site";
@@ -65,16 +67,29 @@ async function main() {
       payouts: provider.payouts.map((row) => ({ _type: "feeRow", ...row })),
       order,
     })),
-    ...posts.map((post) => ({
-      _id: `post-${post.slug}`,
-      _type: "post",
-      title: post.title,
-      slug: { _type: "slug", current: post.slug },
-      excerpt: post.excerpt,
-      publishedAt: post.publishedAt,
-      author: post.author,
-      body: post.body,
-    })),
+    ...(
+      await Promise.all(
+        posts.map(async (post) => {
+          const file = await readFile(path.join(__dirname, "../public", post.image.src.replace(/^\//, "")));
+          const asset = await client.assets.upload("image", file, { filename: `${post.slug}.webp` });
+          return {
+            _id: `post-${post.slug}`,
+            _type: "post",
+            title: post.title,
+            slug: { _type: "slug", current: post.slug },
+            excerpt: post.excerpt,
+            publishedAt: post.publishedAt,
+            author: post.author,
+            image: {
+              _type: "image",
+              alt: post.image.alt,
+              asset: { _type: "reference", _ref: asset._id },
+            },
+            body: post.body,
+          };
+        }),
+      )
+    ),
   ];
 
   for (const doc of docs) {

@@ -1,5 +1,6 @@
 import { posts as fallback, type Post, type PostBlock } from "@/content/posts";
 import { getSanityClient } from "@/sanity/client";
+import { featuredImage } from "@/sanity/image";
 
 const query = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
   title,
@@ -7,6 +8,7 @@ const query = `*[_type == "post" && defined(slug.current)] | order(publishedAt d
   excerpt,
   publishedAt,
   author,
+  image { alt, hotspot, crop, asset->{ _id } },
   body
 }`;
 
@@ -16,17 +18,21 @@ function isBlock(value: unknown): value is PostBlock {
   return block._type === "block" && Array.isArray(block.children) && block.children.some((child) => child?.text);
 }
 
-function clean(post: Partial<Post> | null | undefined): Post | null {
+function clean(post: Partial<Post> & { image?: Parameters<typeof featuredImage>[0] } | null | undefined): Post | null {
   if (!post?.title || !post.slug || !post.excerpt || !post.publishedAt) return null;
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug)) return null;
   const body = (post.body ?? []).filter(isBlock);
   if (!body.length) return null;
+  const local = fallback.find((item) => item.slug === post.slug)?.image;
+  const image = featuredImage(post.image, post.title) ?? local;
+  if (!image) return null;
   return {
     title: post.title,
     slug: post.slug,
     excerpt: post.excerpt,
     publishedAt: post.publishedAt,
     author: post.author || "BluuPay",
+    image,
     body,
   };
 }

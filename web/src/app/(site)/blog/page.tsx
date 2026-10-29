@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { PostImage } from "@/components/PostImage";
 import { PageHero } from "@/components/Sections";
 import { breadcrumbSchema } from "@/lib/schema";
 import { formatPostDate, getPosts } from "@/lib/posts";
@@ -30,7 +31,11 @@ export default async function BlogPage() {
             <ul className="grid gap-4">
               {posts.map((post) => (
                 <li key={post.slug}>
-                  <article className="rounded-[1.75rem] border border-line bg-white p-6 sm:p-8">
+                  <article className="grid overflow-hidden rounded-[1.75rem] border border-line bg-white sm:grid-cols-[17rem_1fr]">
+                    <Link href={`/blog/${post.slug}`} className="block bg-paper" tabIndex={-1} aria-hidden="true">
+                      <PostImage post={post} sizes="(min-width: 640px) 272px, 100vw" />
+                    </Link>
+                    <div className="p-6 sm:p-8">
                     <p className="text-sm font-semibold text-blue">
                       <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
                       <span className="text-muted"> · {post.author}</span>
@@ -44,6 +49,7 @@ export default async function BlogPage() {
                     <Link href={`/blog/${post.slug}`} className="mt-4 inline-block text-sm font-semibold text-blue">
                       Read the note
                     </Link>
+                    </div>
                   </article>
                 </li>
               ))}

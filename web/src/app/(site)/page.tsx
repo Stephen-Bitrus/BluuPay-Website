@@ -18,6 +18,7 @@ import {
 import { site } from "@/content/site";
 import { getContent } from "@/lib/content";
 import { faqSchema, organizationSchema, softwareSchema, websiteSchema } from "@/lib/schema";
+import { PostImage } from "@/components/PostImage";
 import { formatPostDate, getPosts } from "@/lib/posts";
 import { dashboardUrl, pageMeta } from "@/lib/seo";
 
@@ -154,7 +155,11 @@ export default async function HomePage() {
           </div>
           <ul className="mt-8 grid gap-4 lg:grid-cols-3">
             {posts.slice(0, 3).map((post) => (
-              <li key={post.slug} className="rounded-3xl border border-line p-5">
+              <li key={post.slug} className="overflow-hidden rounded-3xl border border-line">
+                <Link href={`/blog/${post.slug}`} className="block bg-paper" tabIndex={-1} aria-hidden="true">
+                  <PostImage post={post} sizes="(min-width: 1024px) 360px, 100vw" />
+                </Link>
+                <div className="p-5">
                 <p className="text-sm font-semibold text-blue">
                   <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
                 </p>
@@ -164,6 +169,7 @@ export default async function HomePage() {
                   </Link>
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-muted">{post.excerpt}</p>
+                </div>
               </li>
             ))}
           </ul>

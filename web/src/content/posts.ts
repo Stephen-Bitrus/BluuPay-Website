@@ -10,12 +10,20 @@ export type PostBlock = {
   markDefs?: PostMark[];
 };
 
+export type PostImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type Post = {
   title: string;
   slug: string;
   excerpt: string;
   publishedAt: string;
   author: string;
+  image: PostImage;
   body: PostBlock[];
 };
 
@@ -48,6 +56,12 @@ export const posts: Post[] = [
     excerpt: "Point of sale, payments, stock, and the mobile app are live. WhatsApp, terminals, the desktop app, offline selling, and BluuPay hardware are not.",
     publishedAt: "2026-10-28T09:00:00.000Z",
     author: "BluuPay",
+    image: {
+      src: "/blog/what-a-shop-can-use-today.webp",
+      alt: "BluuPay point of sale on a phone, beside a note that stock and payments are on the phone.",
+      width: 1600,
+      height: 900,
+    },
     body: [
       block("today-1", [
         "BluuPay is the business record for a Nigerian shop. A sale is tied to the product, and stock, invoices, customers, expenses, tax, and profit stay on that same record.",
@@ -74,6 +88,12 @@ export const posts: Post[] = [
     excerpt: "Priced collections are a bank transfer to a virtual account, or a wallet payment. The rate depends on the provider.",
     publishedAt: "2026-10-22T09:00:00.000Z",
     author: "BluuPay",
+    image: {
+      src: "/blog/palmpay-or-nomba.webp",
+      alt: "Palmpay bank transfer at 1.9% capped at ₦2,000, next business day, and Nomba MFB at 2.2% capped at ₦2,000, instant.",
+      width: 1600,
+      height: 900,
+    },
     body: [
       block("pay-1", [
         "BluuPay prices two collection channels: bank transfer to a virtual account, and wallet payment. USSD and cash can be recorded on the sale. They are not collection-fee rows.",
@@ -99,6 +119,12 @@ export const posts: Post[] = [
     excerpt: "The point of sale keeps the product, the price, and the way the customer paid on one sale.",
     publishedAt: "2026-10-16T09:00:00.000Z",
     author: "BluuPay",
+    image: {
+      src: "/blog/record-the-payment.webp",
+      alt: "BluuPay point of sale with product photos, prices, stock, and an empty current order.",
+      width: 1600,
+      height: 900,
+    },
     body: [
       block("sale-1", [
         "At the counter, search the shelf, see the price and the stock, and add the product to the order. The sale lands on the business record when it is checked out.",

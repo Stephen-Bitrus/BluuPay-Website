@@ -177,6 +177,21 @@ export const post = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "image",
+      title: "Featured image",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt text",
+          type: "string",
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "body",
       type: "array",
       of: [
@@ -218,7 +233,7 @@ export const post = defineType({
   ],
   orderings: [{ title: "Published", name: "publishedAtDesc", by: [{ field: "publishedAt", direction: "desc" }] }],
   preview: {
-    select: { title: "title", subtitle: "publishedAt" },
+    select: { title: "title", subtitle: "publishedAt", media: "image" },
   },
 });
 

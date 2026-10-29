@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
   allowedDevOrigins: ["127.0.0.1", "localhost"],
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+  },
   compiler: {
     styledComponents: true,
   },

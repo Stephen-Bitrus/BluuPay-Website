@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { PostBody } from "@/components/PostBody";
+import { PostImage } from "@/components/PostImage";
 import { site } from "@/content/site";
 import { formatPostDate, getPost, getPosts } from "@/lib/posts";
 import { absoluteUrl, pageMeta } from "@/lib/seo";
@@ -18,7 +19,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return { title: "Note not found", robots: { index: false, follow: false } };
-  return pageMeta(post.title, post.excerpt, `/blog/${post.slug}`);
+  const meta = pageMeta(post.title, post.excerpt, `/blog/${post.slug}`);
+  const image = post.image.src.startsWith("http") ? post.image.src : absoluteUrl(post.image.src);
+  return {
+    ...meta,
+    openGraph: { ...meta.openGraph, images: [{ url: image, alt: post.image.alt }] },
+    twitter: { ...meta.twitter, images: [image] },
+  };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,6 +43,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           description: post.excerpt,
           datePublished: post.publishedAt,
           author: { "@type": "Organization", name: post.author, url: site.url },
+          image: post.image.src.startsWith("http") ? post.image.src : absoluteUrl(post.image.src),
           publisher: { "@type": "Organization", name: site.name, url: site.url },
           mainEntityOfPage: url,
         }}
@@ -66,6 +74,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <span className="text-muted"> · {post.author}</span>
           </p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{post.title}</h1>
+          <figure className="mt-8 overflow-hidden rounded-[1.75rem] border border-line">
+            <PostImage post={post} priority sizes="(min-width: 768px) 768px, 100vw" />
+          </figure>
           <p className="mt-5 text-lg leading-8 text-muted">{post.excerpt}</p>
           <PostBody body={post.body} />
           <p className="mt-12">

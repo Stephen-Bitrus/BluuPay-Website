@@ -8,6 +8,7 @@
     "seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.1.1",
     "@vercel/analytics": "^2.0.1",
     "next": "^15.5.4",
     "next-sanity": "^11.6.1",
