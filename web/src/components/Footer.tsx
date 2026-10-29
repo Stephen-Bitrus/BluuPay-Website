@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SocialIcon } from "@/components/Icons";
 import { site } from "@/content/site";
 
 export function Footer({ dashboard }: { dashboard: string }) {
@@ -12,11 +13,18 @@ export function Footer({ dashboard }: { dashboard: string }) {
           </span>
           <p className="mt-4 text-sm leading-6 text-white/70">{site.tagline}</p>
           <p className="mt-2 text-sm leading-6 text-white/70">For merchants in Nigeria.</p>
-          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+          <ul className="mt-4 flex flex-wrap gap-2">
             {site.socials.map((item) => (
               <li key={item.name}>
-                <a href={item.href} className="text-white/80 hover:text-white" target="_blank" rel="noopener noreferrer">
-                  {item.name}
+                <a
+                  href={item.href}
+                  aria-label={item.name}
+                  title={item.name}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 hover:border-white/40 hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SocialIcon name={item.name} className="h-4 w-4" />
                 </a>
               </li>
             ))}
