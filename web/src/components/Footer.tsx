@@ -53,8 +53,6 @@ export function Footer({ dashboard }: { dashboard: string }) {
           <h2 className="text-sm font-semibold">Contact</h2>
           <ul className="mt-3 grid gap-2 text-sm text-white/75">
             <li><a href={`mailto:${site.emails.hello}`} className="hover:text-white">{site.emails.hello}</a></li>
-            <li><a href={`mailto:${site.emails.legal}`} className="hover:text-white">{site.emails.legal}</a></li>
-            <li><a href={`mailto:${site.emails.privacy}`} className="hover:text-white">{site.emails.privacy}</a></li>
             <li><Link href="/privacy-policy" className="hover:text-white">Privacy policy</Link></li>
             <li><Link href="/terms-of-service" className="hover:text-white">Terms of service</Link></li>
           </ul>
